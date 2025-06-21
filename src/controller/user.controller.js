@@ -66,7 +66,9 @@ const updateUser = async (req, res) => {
 
 const deleteUser =async(req,res)=>{
 try {
-    const {id} = req.params;
+    console.log(req.params);
+    
+const {id} = req.params;
     const isUser = await User.findByPk(id);
     if (!isUser) {
         return res.json({
@@ -74,7 +76,7 @@ try {
             status: false
         })
     }
-    const deleteUser = await User.delete({
+    const deleteUser = await User.destroy({
         where:{id}
     })
     if(!deleteUser){
@@ -88,6 +90,8 @@ try {
         status: true
     })
 } catch (error) {
+    console.log(error);
+    
     throw new Error("Error in deleteUser", error)
 }
 }
